@@ -1,16 +1,33 @@
+
+import {useEffect, useState} from "react";
+import {GifItem} from "./GifItem.jsx";
+import {getGif} from "../helpers/getGif.js";
+
+
 export const GifGrid = ({category}) => {
 
-  const getGif= async ()=>{
-      const url=`https://pokeapi.co/api/v2/pokemon/bulbasaur`
-       const resp=await fetch(url);
-      console.log(resp)
-  }
+    const [image, setImage] = useState([])
 
-  getGif();
+    const GifImage= async ()=>{
+        const newImage=await getGif(category);
+        setImage(newImage);
+    }
+
+    useEffect(() => {
+        GifImage();
+    }, []);
+
+
+
   return(
       <>
-      <h2>{category}</h2>
+        <h1>{category}</h1>
 
+          <div className="card-grid">
+              {image.map(({id,title,url})=>(
+                <GifItem />
+              ))}
+          </div>
 
       </>
   )
