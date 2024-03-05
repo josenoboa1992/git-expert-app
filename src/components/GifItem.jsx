@@ -1,5 +1,8 @@
-export const GifItem = () => {
+export const GifItem = ({title,url}) => {
 return(
-    <h1>hola mundo</h1>
+    <div className="card">
+       <img src={url} alt={title}/>
+        <p>{title}</p>
+    </div>
 )
 }
